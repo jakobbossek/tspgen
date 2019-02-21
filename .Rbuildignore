@@ -1,0 +1,16 @@
+test.R
+^.*\.Rproj$
+^\.Rproj\.user$
+^.*tar.gz$
+.gitignore
+.gitmodules
+README.md
+test_all.R
+.travis.yml
+appveyor.yml
+examples
+man-roxygen
+todo
+cran-comments.md
+^docs$
+data-raw
