@@ -11,6 +11,10 @@
 # @return [\code{matrix}]
 #   Numeric matrix of globally mutated city coordinates.
 doNormalMutation = function(coords, pm = 0.1, sigma = 0.0025) {
+  checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
+  checkmate::assertNumber(pm, lower = 0, upper = 1)
+  checkmate::assertNumber(sigma, lower = 0.00001, upper = 1)
+
   to.mutate = sampleRows(coords, pm)
   ## pmin(pmax(...)) used to ensure we stay in bounds:
   if (length(to.mutate) > 0L) {

@@ -1,4 +1,10 @@
 doExplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.4, ...) {
+  checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
+  checkmate::assertNumber(min.eps, lower = 0.05, upper = 0.5)
+  checkmate::assertNumber(max.eps, lower = 0.05, upper = 0.5)
+  if (min.eps > max.eps)
+    BBmisc::stopf("[doExplosionMutation] min.eps must not be greater than max.eps.")
+
   # determine center of explosion
   center = runif(2L)
   #center = c(0.5, 0.5)
@@ -21,10 +27,10 @@ doExplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.4, ...) {
   mutants = t(apply(coords[to.mutate, ], 1L, function(point) {
     # normalized direction vector
     dir.vec = getNormalizedDirectionVector(center, point)
-
     # now shift point by at least eps into the dir.vec direction
     center + (dir.vec * (eps + rexp(1L, rate = 10)))
   }))
+
   coords[to.mutate, ] = forceToBounds(mutants)
   return(coords)
 }

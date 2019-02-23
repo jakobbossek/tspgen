@@ -1,4 +1,7 @@
 doAxisProjectionMutation = function(coords, pm, ...) {
+  checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
+  checkmate::assertNumber(pm, lower = 0, upper = 1)
+
   to.mutate = sampleRows(coords, p = pm)
 
   if (length(to.mutate) < 2L)

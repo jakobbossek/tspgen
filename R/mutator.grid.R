@@ -1,9 +1,17 @@
 doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, ...) {
+  checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
+  checkmate::assertNumber(box.min, lower = 0.05, upper = 0.5)
+  checkmate::assertNumber(box.max, lower = 0.05, upper = 0.5)
+  if (box.min > box.max)
+    BBmisc::stopf("[doGridMutation] box.min must not be greater than box.max.")
+
   box.width  = runif(1L, min = box.min, max = box.max)
   box.height = runif(1L, min = box.min, max = box.max)
 
+  # where to place the box inside [0, 1] x [0, 1]
   anchor = runif(2L, 0, c(1 - box.width, 1 - box.height))
 
+  # which points should be subject to mutation
   to.mutate = which(
     (coords[, 1L] > anchor[1L]) &
     (coords[, 1L] <= anchor[1L] + box.width) &
