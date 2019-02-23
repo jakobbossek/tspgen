@@ -4,6 +4,17 @@ sampleRows = function(x, p, ...) {
   which(runif(nrow(x)) < p)
 }
 
+replicate2 = function(x, fun, n, ...) {
+  for (i in seq_len(n)) {
+    x = fun(x, ...)
+  }
+  return(x)
+}
+
+degreeToRadiant = function(alpha) {
+  alpha * (pi / 180)
+}
+
 getRotationMatrix = function(alpha) {
   alpha = degreeToRadiant(alpha)
   matrix(c(

@@ -14,7 +14,7 @@ BugReports: https://github.com/jakobbossek/tspgen/issues
 Depends:
     R (>= 2.10),
     BBmisc (>= 1.6),
-    netgen (>= 1.5)
+    netgen (>= 1.3)
 Imports:
     checkmate (>= 1.1)
 Suggests:
@@ -22,4 +22,4 @@ Suggests:
     rmarkdown
 ByteCompile: yes
 LazyData: yes
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
