@@ -24,7 +24,7 @@ getRotationMatrix = function(alpha) {
 }
 
 # FIXME: lower and upper: should we drop it or pass down to getUniformMatrix?
-forceToBounds = function(x, lower = 0, upper = 1, method = "uniform") {
+forceToBounds = function(x, lower = 0, upper = 1, method = "boundary") {
   methods = c("boundary", "uniform")
   if (is.null(method))
     method = sample(methods, size = 1L)

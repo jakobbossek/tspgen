@@ -21,6 +21,11 @@
 #'   Number of iterations to perform.
 #'   Default is 10.
 #' @template arg_collection
+#' @param return.all [\code{logical(1)}]\cr
+#'   Shall all interim instances be stored and returned?
+#'   Default is \code{FALSE}.
+#' @return Either a netgen \code{Network} if \code{return.all = FALSE}, otherwise a
+#' list of netgen networks of length \code{iters + 1}.
 #' @examples
 #' collection = init()
 #' collection = addMutator(collection, "doUniformMutation", pm = 0.3)
@@ -31,7 +36,12 @@
 #'
 #' x = build(n = 50, iters = 10, collection = collection)
 #' @export
-build = function(n, iters = 10L, collection) {
+build = function(n, iters = 10L, collection, return.all = FALSE) {
+  checkmate::asCount(n)
+  checkmate::asCount(iters)
+  checkmate::assertClass(collection, "tspgen_collection")
+  checkmate::assertFlag(return.all)
+
   mutators = collection$mutators
   n.mutators = length(mutators)
   names = names(mutators)
@@ -41,14 +51,24 @@ build = function(n, iters = 10L, collection) {
   # baseline is a RUE instance
   coords = getUniformMatrix(n = n)
 
+  if (return.all) {
+    coords.list = vector(mode = "list", length = iters + 1)
+    coords.list[[1L]] = coords
+  }
+
   for (i in seq_len(iters)) {
     idx = sample(seq_len(n.mutators), size = 1L, prob = probs)
     mutator.fun  = names[idx]
     mutator.pars = mutators[[mutator.fun]]
     mutator.pars = BBmisc::insert(mutator.pars, list(coords = coords))
     coords = do.call(mutator.fun, mutator.pars)
+    if (return.all) {
+      coords.list[[i + 1L]] = coords
+    }
   }
 
+  if (return.all)
+    return(lapply(coords.list, netgen::makeNetwork, lower = 0, upper = 1))
   return(netgen::makeNetwork(coords, lower = 0, upper = 1))
 }
 

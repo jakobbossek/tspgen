@@ -31,6 +31,20 @@ doExplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.4, ...) {
     center + (dir.vec * (eps + rexp(1L, rate = 10)))
   }))
 
+  # debug
+  # dd = as.data.frame(coords)
+  # colnames(dd) = c("x1", "x2")
+  # dd$mutated = ifelse(dists < eps, "YES", "NO")
+  # pl = ggplot(dd, aes(x = x1, y = x2, color = mutated)) + geom_point()
+  # print(pl)
+  # BBmisc::pause()
+
   coords[to.mutate, ] = forceToBounds(mutants)
+
+  # debug
+  # dd[to.mutate, c("x1", "x2")] = coords[to.mutate, ]
+  # pl = ggplot(dd, aes(x = x1, y = x2, color = mutated)) + geom_point()
+  # print(pl)
+  # BBmisc::pause()
   return(coords)
 }

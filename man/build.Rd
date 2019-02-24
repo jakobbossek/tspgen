@@ -4,7 +4,7 @@
 \alias{build}
 \title{Instance generation working horse.}
 \usage{
-build(n, iters = 10L, collection)
+build(n, iters = 10L, collection, return.all = FALSE)
 }
 \arguments{
 \item{n}{[\code{integer(1)}]\cr
@@ -16,6 +16,14 @@ Default is 10.}
 
 \item{collection}{[\code{tspgen_collection}]\cr
 Collection of mutation operators.}
+
+\item{return.all}{[\code{logical(1)}]\cr
+Shall all interim instances be stored and returned?
+Default is \code{FALSE}.}
+}
+\value{
+Either a netgen \code{Network} if \code{return.all = FALSE}, otherwise a
+list of netgen networks of length \code{iters + 1}.
 }
 \description{
 This function expects as parameters the desired instance size \eqn{n},
