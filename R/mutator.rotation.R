@@ -11,6 +11,7 @@ doRotationMutation = function(coords, pm = 0.1, ...) {
 
   # NOTE: rotation is centered around origin. Hence, we shift the rotated point cloud by a random number
   mutants = t(rot.mat %*% t(coords[to.mutate, ]) + runif(2L))
-  coords[to.mutate, ] = forceToBounds(mutants)
+  #coords[to.mutate, ] = forceToBounds(mutants)
+  coords[to.mutate, ] = mutants
   return(coords)
 }

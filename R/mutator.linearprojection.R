@@ -30,6 +30,6 @@ doLinearProjectionMutation = function(coords, pm = 0.1, jitter.sd = 0, ...) {
     coords[to.mutate, 2L] = coords[to.mutate, 2L] + rnorm(n.mutants, sd = jitter.sd)
   }
 
-  coords[to.mutate, ] = forceToBounds(coords[to.mutate, ])
+  #coords[to.mutate, ] = forceToBounds(coords[to.mutate, ])
   return(coords)
 }

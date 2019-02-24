@@ -35,7 +35,7 @@ forceToBounds = function(x, lower = 0, upper = 1, method = "boundary") {
       out.of.bounds = (x < lower | x > upper)
       out.of.bounds = rowSums(out.of.bounds) > 0
       n.oob = sum(out.of.bounds)
-      x[out.of.bounds, ] = getUniformMatrix(n.oob)
+      x[out.of.bounds, ] = getUniformMatrix(n.oob) * upper
       x
     })
 }

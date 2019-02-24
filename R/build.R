@@ -24,6 +24,10 @@
 #' @param return.all [\code{logical(1)}]\cr
 #'   Shall all interim instances be stored and returned?
 #'   Default is \code{FALSE}.
+#' @param upper [\code{numeric(1)}]\cr
+#'   Instance generation takes place in \eqn{[0,1]^2}. Use \code{upper} to
+#'   upscale the boundaries, i.e., place nodes in \eqn{[0, \text{upper}]^2}.
+#'   Default is 1.
 #' @return Either a netgen \code{Network} if \code{return.all = FALSE}, otherwise a
 #' list of netgen networks of length \code{iters + 1}.
 #' @examples
@@ -36,11 +40,12 @@
 #'
 #' x = build(n = 50, iters = 10, collection = collection)
 #' @export
-build = function(n, iters = 10L, collection, return.all = FALSE) {
+build = function(n, iters = 10L, collection, return.all = FALSE, upper = 1) {
   checkmate::asCount(n)
   checkmate::asCount(iters)
   checkmate::assertClass(collection, "tspgen_collection")
   checkmate::assertFlag(return.all)
+  checkmate::assertNumber(upper, lower = 1, finite = TRUE)
 
   mutators = collection$mutators
   n.mutators = length(mutators)
@@ -53,7 +58,7 @@ build = function(n, iters = 10L, collection, return.all = FALSE) {
 
   if (return.all) {
     coords.list = vector(mode = "list", length = iters + 1)
-    coords.list[[1L]] = coords
+    coords.list[[1L]] = coords * upper
   }
 
   for (i in seq_len(iters)) {
@@ -62,14 +67,17 @@ build = function(n, iters = 10L, collection, return.all = FALSE) {
     mutator.pars = mutators[[mutator.fun]]
     mutator.pars = BBmisc::insert(mutator.pars, list(coords = coords))
     coords = do.call(mutator.fun, mutator.pars)
+    coords = forceToBounds(coords)
     if (return.all) {
-      coords.list[[i + 1L]] = coords
+      coords.list[[i + 1L]] = coords * upper
     }
   }
 
+  #print(coords.list)
+
   if (return.all)
-    return(lapply(coords.list, netgen::makeNetwork, lower = 0, upper = 1))
-  return(netgen::makeNetwork(coords, lower = 0, upper = 1))
+    return(lapply(coords.list, netgen::makeNetwork, lower = 0, upper = upper))
+  return(netgen::makeNetwork(coords * upper, lower = 0, upper = upper))
 }
 
 #' Initialize a bare mutation operator collection.

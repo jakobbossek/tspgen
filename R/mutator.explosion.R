@@ -39,7 +39,8 @@ doExplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.4, ...) {
   # print(pl)
   # BBmisc::pause()
 
-  coords[to.mutate, ] = forceToBounds(mutants)
+  #coords[to.mutate, ] = forceToBounds(mutants)
+  coords[to.mutate, ] = mutants
 
   # debug
   # dd[to.mutate, c("x1", "x2")] = coords[to.mutate, ]

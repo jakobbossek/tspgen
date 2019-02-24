@@ -47,7 +47,8 @@ doTubeMutation = function(coords, min.eps = 0.1, max.eps = 0.3, type, ...) {
   else
     coords[to.mutate, ] - norm.dir.vecs * dists[to.mutate] * pmin(abs(rnorm(length(to.mutate))), 1)
 
-  coords[to.mutate, ] = forceToBounds(mutants)
+  #coords[to.mutate, ] = forceToBounds(mutants)
+  coords[to.mutate, ] = mutants
 
   # # debug
   # instance = makeNetwork(coords)
