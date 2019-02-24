@@ -1,7 +1,9 @@
-doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, ...) {
+doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(box.min, lower = 0.05, upper = 0.5)
   checkmate::assertNumber(box.max, lower = 0.05, upper = 0.5)
+  checkmate::assertNumber(p.rot, lower = 0, upper = 1, null.ok = FALSE)
+
   if (box.min > box.max)
     BBmisc::stopf("[doGridMutation] box.min must not be greater than box.max.")
 
@@ -36,6 +38,15 @@ doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, ...) {
     seq(anchor[1L], anchor[1L] + box.width, length.out = k.dim),
     seq(anchor[2L], anchor[2L] + box.height, length.out = k.dim))
   grid = unname(as.matrix(grid))
+
+  # rotate grid with probability p.rot
+  if (runif(1L) < p.rot) {
+    angle = runif(1L, min = 0, max = 90)
+    rot.mat = getRotationMatrix(angle)
+    # perform rotation around grid center
+    grid.mean = colMeans(grid)
+    grid = t(rot.mat %*% (t(grid) - grid.mean) + grid.mean)
+  }
 
   coords[to.mutate, ] = grid
   return(coords)
