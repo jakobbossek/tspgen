@@ -1,8 +1,9 @@
-doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, ...) {
+doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, jitter.sd = 0, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(box.min, lower = 0.05, upper = 0.5)
   checkmate::assertNumber(box.max, lower = 0.05, upper = 0.5)
   checkmate::assertNumber(p.rot, lower = 0, upper = 1, null.ok = FALSE)
+  checkmate::assertNumber(jitter.sd, lower = 0, na.ok = FALSE, null.ok = FALSE)
 
   if (box.min > box.max)
     BBmisc::stopf("[doGridMutation] box.min must not be greater than box.max.")
@@ -46,6 +47,11 @@ doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, ...) 
     # perform rotation around grid center
     grid.mean = colMeans(grid)
     grid = t(rot.mat %*% (t(grid) - grid.mean) + grid.mean)
+  }
+
+  # jitter grid points
+  if (jitter.sd > 0) {
+    grid = grid + rnorm(2 * k.dim.sq, sd = jitter.sd)
   }
 
   coords[to.mutate, ] = grid
