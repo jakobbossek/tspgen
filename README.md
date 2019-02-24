@@ -1,4 +1,4 @@
-# tspgen: Algorithm Selection in R
+# tspgen: TSP Instance Generation
 
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/tspgen)](http://cran.r-project.org/web/packages/tspgen)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/tspgen)](http://cran.rstudio.com/web/packages/tspgen/index.html)
@@ -9,6 +9,21 @@
 [![Research software impact](http://depsy.org/api/package/cran/tspgen/badge.svg)](http://depsy.org/package/r/tspgen)
 
 ## What is this all about?
+
+Usually optimization algorithms are compared by running benchmarks on test problems. For the well-known Traveling-Salesperson-Problem (TSP) diverse benchmark sets exist ranging from instances placed purely at random in the Euclidean plane (so-called Random Uniform Euclidean, RUE), placed in cluster structures (see e.g., the related [netgen](https://github.com/jakobbossek/netgen) R package) or stemming from real-world applications (e.g., TSPlib or VLSI instances). 
+
+In the past decade due to advances in machine learning the area of per-instance Algorithm Selection (AS) gained importance significantly. Here, the primary goal is to build a decision-rule that decides for a certain algorithm from a portfolio of well-performing algorithms which will most likely perform best on a given instance. The learning process of the decision rule usually relies on a set of (computationally cheap) characteristics of problem instances, termed *instance features* or simple *features*. Another aspect closely related to AS is the understanding of working principles of algorithms: which features / feature combinations are crucial to determine the performance of a given algorithm or a pair of algorithms? Which features values or ranges of feature values of an instance at hand poses a hard challenge for an algorithm?
+Recent research approaches to answer this interesting question adopt evolutionary algorithms which evolve a population of instances which are particularly hard for a given algorithm with respect to approximation quality [1, 2, 3] or maximizing the performance gap between two competitive solvers [4, 5, 6]. However, the latter approaches stick to simple, straight forward mutation operators which results in instances with severe structural similarity and high visual similarity to RUE instances.
+
+This package introduces a set of sophisticated, problem tailored mutation operators which allow for the generation of more diverse sets of instances.
+
+To be continued ...
+
+## Related Software
+
+To be written ...
+
+## How to Contribute
 
 To be written ...
 
