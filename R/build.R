@@ -26,8 +26,15 @@
 #'   Default is \code{FALSE}.
 #' @param upper [\code{numeric(1)}]\cr
 #'   Instance generation takes place in \eqn{[0,1]^2}. Use \code{upper} to
-#'   upscale the boundaries, i.e., place nodes in \eqn{[0, \text{upper}]^2}.
+#'   upscale the boundaries, i.e., place nodes in \eqn{[0, upper]^2}.
 #'   Default is 1.
+#' @param bound.handling [\code{character(1)}]\cr
+#'   Occasionally during instance generation points are moved outside the boundaries
+#'   of the point space. The parameter \code{bound.handling} determines how to deal
+#'   with these points. Option \dQuote{uniform} places outliers uniform at random within
+#'.  the boundaries while option \dQuote{boundary} places them on the corresponding
+#'   violates boundary/boundaries.
+#'   Default is \dQuote{uniform}.
 #' @return Either a netgen \code{Network} if \code{return.all = FALSE}, otherwise a
 #' list of netgen networks of length \code{iters + 1}.
 #' @examples
@@ -40,12 +47,13 @@
 #'
 #' x = build(n = 50, iters = 10, collection = collection)
 #' @export
-build = function(n, iters = 10L, collection, return.all = FALSE, upper = 1) {
+build = function(n, iters = 10L, collection, return.all = FALSE, upper = 1, bound.handling = "uniform") {
   checkmate::asCount(n)
   checkmate::asCount(iters)
   checkmate::assertClass(collection, "tspgen_collection")
   checkmate::assertFlag(return.all)
   checkmate::assertNumber(upper, lower = 1, finite = TRUE)
+  checkmate::assertChoice(bound.handling, choices = c("uniform", "boundary"))
 
   mutators = collection$mutators
   n.mutators = length(mutators)
@@ -67,7 +75,7 @@ build = function(n, iters = 10L, collection, return.all = FALSE, upper = 1) {
     mutator.pars = mutators[[mutator.fun]]
     mutator.pars = BBmisc::insert(mutator.pars, list(coords = coords))
     coords = do.call(mutator.fun, mutator.pars)
-    coords = forceToBounds(coords)
+    coords = forceToBounds(coords, bound.handling = bound.handling)
     if (return.all) {
       coords.list[[i + 1L]] = coords * upper
     }

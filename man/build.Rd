@@ -4,7 +4,8 @@
 \alias{build}
 \title{Instance generation working horse.}
 \usage{
-build(n, iters = 10L, collection, return.all = FALSE)
+build(n, iters = 10L, collection, return.all = FALSE, upper = 1,
+  bound.handling = "uniform")
 }
 \arguments{
 \item{n}{[\code{integer(1)}]\cr
@@ -20,6 +21,19 @@ Collection of mutation operators.}
 \item{return.all}{[\code{logical(1)}]\cr
 Shall all interim instances be stored and returned?
 Default is \code{FALSE}.}
+
+\item{upper}{[\code{numeric(1)}]\cr
+Instance generation takes place in \eqn{[0,1]^2}. Use \code{upper} to
+upscale the boundaries, i.e., place nodes in \eqn{[0, upper]^2}.
+Default is 1.}
+
+\item{bound.handling}{[\code{character(1)}]\cr
+  Occasionally during instance generation points are moved outside the boundaries
+  of the point space. The parameter \code{bound.handling} determines how to deal
+  with these points. Option \dQuote{uniform} places outliers uniform at random within
+.  the boundaries while option \dQuote{boundary} places them on the corresponding
+  violates boundary/boundaries.
+  Default is \dQuote{uniform}.}
 }
 \value{
 Either a netgen \code{Network} if \code{return.all = FALSE}, otherwise a

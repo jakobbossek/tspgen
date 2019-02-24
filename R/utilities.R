@@ -24,12 +24,12 @@ getRotationMatrix = function(alpha) {
 }
 
 # FIXME: lower and upper: should we drop it or pass down to getUniformMatrix?
-forceToBounds = function(x, lower = 0, upper = 1, method = "boundary") {
+forceToBounds = function(x, lower = 0, upper = 1, bound.handling = "boundary") {
   methods = c("boundary", "uniform")
-  if (is.null(method))
-    method = sample(methods, size = 1L)
-  checkmate::assertChoice(method, choices = methods)#, "epsboundary"))
-  switch(method,
+  if (is.null(bound.handling))
+    bound.handling = sample(methods, size = 1L)
+  checkmate::assertChoice(bound.handling, choices = methods)#, "epsboundary"))
+  switch(bound.handling,
     "boundary" = pmin(pmax(x, lower), upper),
     "uniform" = {
       out.of.bounds = (x < lower | x > upper)
