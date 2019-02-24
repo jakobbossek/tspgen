@@ -1,4 +1,4 @@
-doMutation = function(coords, pm, ...) {
+doMutation = function(coords, pm = 0.1, ...) {
   mutators = list(
     doExpansionMutation,
     doCompressionMutation,
@@ -15,25 +15,3 @@ doMutation = function(coords, pm, ...) {
 
   mutators[[idx]](coords, pm = pm, ...)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

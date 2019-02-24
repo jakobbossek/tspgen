@@ -1,4 +1,4 @@
-doRotationMutation = function(coords, pm, ...) {
+doRotationMutation = function(coords, pm = 0.1, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(pm, lower = 0, upper = 1)
 
