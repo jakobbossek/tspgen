@@ -1,6 +1,7 @@
-doAxisProjectionMutation = function(coords, pm = 0.1, ...) {
+doAxisProjectionMutation = function(coords, pm = 0.1, jitter.sd = 0, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(pm, lower = 0, upper = 1)
+  checkmate::assertNumber(jitter.sd, lower = 0, na.ok = FALSE, null.ok = FALSE)
 
   to.mutate = sampleRows(coords, p = pm)
 
@@ -15,6 +16,11 @@ doAxisProjectionMutation = function(coords, pm = 0.1, ...) {
 
   # sample "constant axis" within range
   line = runif(1L, min = rng[1L], max = rng[2L])
+
+  # jitter points around projected axis
+  if (jitter.sd > 0) {
+    line = line + rnorm(length(to.mutate), sd = jitter.sd)
+  }
 
   coords[to.mutate, axis] = line
   return(coords)
