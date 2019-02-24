@@ -1,10 +1,12 @@
-doLinearProjectionMutation = function(coords, pm = 0.1, ...) {
+doLinearProjectionMutation = function(coords, pm = 0.1, jitter.sd = 0, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(pm, lower = 0, upper = 1)
+  checkmate::assertNumber(jitter.sd, lower = 0, na.ok = FALSE, null.ok = FALSE)
 
   to.mutate = sampleRows(coords, p = pm)
+  n.mutants = length(to.mutate)
 
-  if (length(to.mutate) < 2L)
+  if (n.mutants < 2L)
     return(coords)
 
   # sample linear function
@@ -22,6 +24,12 @@ doLinearProjectionMutation = function(coords, pm = 0.1, ...) {
   }
 
   coords[to.mutate, 2L] = linFun(coords[to.mutate, 1L])
+
+  # jitter points vertically around projected line
+  if (jitter.sd > 0) {
+    coords[to.mutate, 2L] = coords[to.mutate, 2L] + rnorm(n.mutants, sd = jitter.sd)
+  }
+
   coords[to.mutate, ] = forceToBounds(coords[to.mutate, ])
   return(coords)
 }
