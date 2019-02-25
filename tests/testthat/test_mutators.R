@@ -19,6 +19,7 @@ test_that("Mutators produce valid output", {
   for (i in seq_len(n.mutators)) {
     coords = replicate2(coords, mutators[[i]], n = 25L)
     checkmate::expect_matrix(coords, ncols = 2L, nrows = n.nodes, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
+    coords = forceToBounds(coords)
     expect_true(all(coords >= 0 & coords <= 1))
   }
 })

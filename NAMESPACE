@@ -2,6 +2,10 @@
 
 export(addMutator)
 export(build)
+export(doClusterMutation)
+export(doNormalMutation)
+export(doRotationMutation)
+export(doUniformMutation)
 export(init)
 export(setProbabilities)
 import(BBmisc)

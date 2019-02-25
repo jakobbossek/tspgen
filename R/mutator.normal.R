@@ -1,15 +1,23 @@
-# Local mutation operator of EA.
-# Global mutation operator for EA.
+#' @title Normal mutation
+#'
+#' @description Each point is subject to additive Gaussian noise with probability \code{pm}.
+#'
+#' @references
+#' Mersmann, O., Bischl, B., Bossek, J., Trautmann, H., Wagner, M., & Neumann, F. (2012).
+#' Local search and the traveling salesman problem: A feature-based characterization of
+#' problem hardness. Lecture Notes in Computer Science (Including Subseries Lecture Notes
+#' in Artificial Intelligence and Lecture Notes in Bioinformatics), 7219 LNCS, 115-129.
 #
-# @param coords [\code{matrix}]\cr
-#   Numeric matrix of city coordinates,
-#   rows denote cities.
-# @param mut_op [\code{numeric(1)}]\cr
-#   Mutation probability from [0,1].
-# @param sigma [\code{numeric(1)}]\cr
-#   Standard deviation of normal noise.
-# @return [\code{matrix}]
-#   Numeric matrix of globally mutated city coordinates.
+#' @template arg_coords
+#' @template arg_pm
+#' @param sigma [\code{numeric(1)}]\cr
+#'   Standard deviation for normal random numbers generator.
+#'   Default is \eqn{0.0025}.
+#' @template arg_dots
+#' @return [\code{matrix}] Mutated coordinates.
+#' @family mutation operators
+#' @seealso \code{\link{build}}
+#' @export
 doNormalMutation = function(coords, pm = 0.1, sigma = 0.0025) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(pm, lower = 0, upper = 1)

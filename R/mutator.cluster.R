@@ -1,3 +1,18 @@
+#' @title
+#' Cluster mutation
+#'
+#' @description A subset \eqn{Q \subseteq P} (each point selected with independent
+#' probability \code{pm}) is replaced by points placed according to a random sampleof size \eqn{|Q|} of
+#' a bi-variate Gaussian distribution with uniformly sampled center and standard
+#' deviation up to 0.3.
+#'
+#' @template arg_coords
+#' @template arg_pm
+#' @template arg_dots
+#' @return [\code{matrix}] Mutated coordinates.
+#' @seealso \code{\link{build}}
+#' @family mutation operators
+#' @export
 doClusterMutation = function(coords, pm = 0.1, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(pm, lower = 0, upper = 1)
