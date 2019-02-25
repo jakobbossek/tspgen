@@ -1,18 +1,19 @@
-doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, jitter.sd = 0, ...) {
+doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, p.jitter = 0, jitter.sd = 0, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(box.min, lower = 0.05, upper = 0.5)
   checkmate::assertNumber(box.max, lower = 0.05, upper = 0.5)
   checkmate::assertNumber(p.rot, lower = 0, upper = 1, null.ok = FALSE)
+  checkmate::assertNumber(p.jitter, lower = 0, upper = 1, null.ok = FALSE)
   checkmate::assertNumber(jitter.sd, lower = 0, na.ok = FALSE, null.ok = FALSE)
 
   if (box.min > box.max)
     BBmisc::stopf("[doGridMutation] box.min must not be greater than box.max.")
 
-  box.width  = runif(1L, min = box.min, max = box.max)
-  box.height = runif(1L, min = box.min, max = box.max)
+  box.width  = stats::runif(1L, min = box.min, max = box.max)
+  box.height = stats::runif(1L, min = box.min, max = box.max)
 
   # where to place the box inside [0, 1] x [0, 1]
-  anchor = runif(2L, 0, c(1 - box.width, 1 - box.height))
+  anchor = stats::runif(2L, 0, c(1 - box.width, 1 - box.height))
 
   # which points should be subject to mutation
   to.mutate = which(
@@ -41,7 +42,7 @@ doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, jitte
   grid = unname(as.matrix(grid))
 
   # rotate grid with probability p.rot
-  if (runif(1L) < p.rot) {
+  if (stats::runif(1L) < p.rot) {
     angle = runif(1L, min = 0, max = 90)
     rot.mat = getRotationMatrix(angle)
     # perform rotation around grid center
@@ -50,8 +51,8 @@ doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, jitte
   }
 
   # jitter grid points
-  if (jitter.sd > 0) {
-    grid = grid + rnorm(2 * k.dim.sq, sd = jitter.sd)
+  if (stats::runif(1L) < p.jitter & jitter.sd > 0) {
+    grid = grid + stats::rnorm(2 * k.dim.sq, sd = jitter.sd)
   }
 
   coords[to.mutate, ] = grid

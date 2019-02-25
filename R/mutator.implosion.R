@@ -6,11 +6,11 @@ doImplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.3, ...) {
     BBmisc::stopf("[doImplosionMutation] min.eps must not be greater than max.eps.")
 
   # get implosion center
-  blackhole = runif(2)
+  blackhole = stats::runif(2)
   #blackhole = c(0.5, 0.5)
 
   # singularity radius
-  eps = runif(1L, min = min.eps, max = max.eps)
+  eps = stats::runif(1L, min = min.eps, max = max.eps)
   #eps = 0.5
 
   dists = getDistancesToCenter(coords, blackhole)
@@ -23,7 +23,7 @@ doImplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.3, ...) {
   mutants = t(apply(coords[to.mutate, ], 1L, function(point) {
     dir.vec = getNormalizedDirectionVector(blackhole, point)
     dist = sqrt(sum((point - blackhole)^2))
-    point + dir.vec * dist * min(abs(rnorm(1L)), eps)#  (runif(1L))
+    point + dir.vec * dist * min(abs(stats::rnorm(1L)), eps)#  (stats::runif(1L))
   }))
   coords[to.mutate, ] = mutants
   # no bounding necessary

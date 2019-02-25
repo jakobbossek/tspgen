@@ -6,11 +6,11 @@ doExplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.4, ...) {
     BBmisc::stopf("[doExplosionMutation] min.eps must not be greater than max.eps.")
 
   # determine center of explosion
-  center = runif(2L)
+  center = stats::runif(2L)
   #center = c(0.5, 0.5)
 
   # radius of explosion
-  eps = runif(1L, min = min.eps, max = max.eps)
+  eps = stats::runif(1L, min = min.eps, max = max.eps)
   #eps = 0.5
 
   # now compute all Euclidean distances to center
@@ -28,7 +28,7 @@ doExplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.4, ...) {
     # normalized direction vector
     dir.vec = getNormalizedDirectionVector(center, point)
     # now shift point by at least eps into the dir.vec direction
-    center + (dir.vec * (eps + rexp(1L, rate = 10)))
+    center + (dir.vec * (eps + stats::rexp(1L, rate = 10)))
   }))
 
   # debug

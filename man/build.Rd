@@ -40,13 +40,13 @@ Either a netgen \code{Network} if \code{return.all = FALSE}, otherwise a
 list of netgen networks of length \code{iters + 1}.
 }
 \description{
-This function expects as parameters the desired instance size \eqn{n},
-a number of iteration to perform and a collection of mutation operators. The
-generation process is sequential:
+This function expects as primary parameters the desired instance size \eqn{n},
+a number of iteration \code{iters} to perform and a collection of mutation operators
+\code{collection}. The generation process is sequential:
 \itemize{
- \item{Place \eqn{n} points uniformly at random in \eqn{[0,1]^2}. We shall denote this
+  \item{Place \eqn{n} points uniformly at random in \eqn{[0,1]^2}. We shall denote this
 set as \eqn{P} in the following.}.
- \item{For the desired number of iterations \code{iters} repeat the following
+  \item{For the desired number of iterations \code{iters} repeat the following
 process: select a mutation operator \eqn{m} from the collection at random (according
 to the probability distribution stored in \code{collection} and set \eqn{P = m(P)}.}
 }
@@ -57,12 +57,16 @@ the algorithm falls back to the uniform distribution, i.e., each mutation operat
 is selected with equal probability for application in each iteration.
 }
 \examples{
+# set up a set of mutation operators
 collection = init()
 collection = addMutator(collection, "doUniformMutation", pm = 0.3)
 collection = addMutator(collection, "doExplosionMutation", min.eps = 0.2, max.eps = 0.4)
 collection = addMutator(collection, "doImplosionMutation", min.eps = 0.2, max.eps = 0.4)
 collection = addMutator(collection, "doAxisProjectionMutation")
+
+# specify probability distribution.
 collection = setProbabilities(collection, probs = c(0.1, 0.6, 0.2, 0.1))
 
 x = build(n = 50, iters = 10, collection = collection)
+x = build(n = 100, iters = 50, collection = collection, return.all = TRUE, bound.handling = "boundary")
 }

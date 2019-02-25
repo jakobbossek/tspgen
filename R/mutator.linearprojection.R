@@ -1,6 +1,7 @@
-doLinearProjectionMutation = function(coords, pm = 0.1, jitter.sd = 0, ...) {
+doLinearProjectionMutation = function(coords, pm = 0.1, p.jitter = 0, jitter.sd = 0, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(pm, lower = 0, upper = 1)
+  checkmate::assertNumber(p.jitter, lower = 0, upper = 1)
   checkmate::assertNumber(jitter.sd, lower = 0, na.ok = FALSE, null.ok = FALSE)
 
   to.mutate = sampleRows(coords, p = pm)
@@ -14,9 +15,9 @@ doLinearProjectionMutation = function(coords, pm = 0.1, jitter.sd = 0, ...) {
 
   # we do not want, e.g., a positive slope if intercept is close to 1
   slope = if (intercept < 0.5)
-    runif(1L, min = 0, max = 3)
+    stats::runif(1L, min = 0, max = 3)
   else
-    runif(1L, min = -3, max = 0)
+    stats::runif(1L, min = -3, max = 0)
 
   # helper function
   linFun = function(x) {
@@ -26,8 +27,8 @@ doLinearProjectionMutation = function(coords, pm = 0.1, jitter.sd = 0, ...) {
   coords[to.mutate, 2L] = linFun(coords[to.mutate, 1L])
 
   # jitter points vertically around projected line
-  if (jitter.sd > 0) {
-    coords[to.mutate, 2L] = coords[to.mutate, 2L] + rnorm(n.mutants, sd = jitter.sd)
+  if (stats::runif(1L) < p.jitter & jitter.sd > 0) {
+    coords[to.mutate, 2L] = coords[to.mutate, 2L] + stats::rnorm(n.mutants, sd = jitter.sd)
   }
 
   #coords[to.mutate, ] = forceToBounds(coords[to.mutate, ])

@@ -18,7 +18,7 @@ doNormalMutation = function(coords, pm = 0.1, sigma = 0.0025) {
   to.mutate = sampleRows(coords, pm)
   ## pmin(pmax(...)) used to ensure we stay in bounds:
   if (length(to.mutate) > 0L) {
-    delta = matrix(rnorm(2 * length(to.mutate), sd = sigma), ncol = 2L)
+    delta = matrix(stats::rnorm(2 * length(to.mutate), sd = sigma), ncol = 2L)
     coords[to.mutate,] = coords[to.mutate,] + delta
     #coords[to.mutate,] = forceToBounds(coords[to.mutate,] + delta)
   }

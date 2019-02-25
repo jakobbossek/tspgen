@@ -1,7 +1,7 @@
 sampleRows = function(x, p, ...) {
   if (!(checkmate::testMatrix(x) | checkmate::testDataFrame(x)))
     BBmisc::stopf("[sampleRows] You need to pass a matrix or a data frame.")
-  which(runif(nrow(x)) < p)
+  which(stats::runif(nrow(x)) < p)
 }
 
 replicate2 = function(x, fun, n, ...) {
@@ -23,7 +23,6 @@ getRotationMatrix = function(alpha) {
     byrow = TRUE, ncol = 2L)
 }
 
-# FIXME: lower and upper: should we drop it or pass down to getUniformMatrix?
 forceToBounds = function(x, lower = 0, upper = 1, bound.handling = "boundary") {
   methods = c("boundary", "uniform")
   if (is.null(bound.handling))
@@ -40,6 +39,13 @@ forceToBounds = function(x, lower = 0, upper = 1, bound.handling = "boundary") {
     })
 }
 
+relocateDuplicates = function(coords) {
+  idx = duplicated(coords)
+  if (sum(idx) > 0)
+    coords[idx, ] = doUniformMutation(coords[idx, , drop = FALSE], pm = 1L)
+  return(coords)
+}
+
 getDistancesToCenter = function(x, center) {
   apply(x, 1L, function(point) {
     sqrt(sum((point - center)^2))
@@ -47,7 +53,7 @@ getDistancesToCenter = function(x, center) {
 }
 
 getUniformMatrix = function(n, d = 2L) {
-  matrix(runif(d * n), ncol = d)
+  matrix(stats::runif(d * n), ncol = d)
 }
 
 getNormalizedDirectionVector = function(x, y) {
@@ -57,13 +63,13 @@ getNormalizedDirectionVector = function(x, y) {
 
 getRandomLinearFunction = function() {
   # sample linear function
-  intercept = runif(1L)
+  intercept = stats::runif(1L)
 
   # we do not want, e.g., a positive slope if intercept is close to 1
   slope = if (intercept < 0.5)
-    runif(1L, min = 0, max = 3)
+    stats::runif(1L, min = 0, max = 3)
   else
-    runif(1L, min = -3, max = 0)
+    stats::runif(1L, min = -3, max = 0)
 
   force(slope)
   force(intercept)

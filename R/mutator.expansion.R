@@ -12,7 +12,7 @@ doTubeMutation = function(coords, min.eps = 0.1, max.eps = 0.3, type, ...) {
   }
 
   # sample "tube-width"
-  eps = runif(1L, min = min.eps, max = max.eps)
+  eps = stats::runif(1L, min = min.eps, max = max.eps)
 
   # get random linear function
   linear = getRandomLinearFunction()
@@ -43,9 +43,9 @@ doTubeMutation = function(coords, min.eps = 0.1, max.eps = 0.3, type, ...) {
 
   # at last do the nice mutation
   mutants = if (type == "expansion")
-    projs[to.mutate, ] + norm.dir.vecs * (eps + rexp(length(to.mutate), rate = 10))
+    projs[to.mutate, ] + norm.dir.vecs * (eps + stats::rexp(length(to.mutate), rate = 10))
   else
-    coords[to.mutate, ] - norm.dir.vecs * dists[to.mutate] * pmin(abs(rnorm(length(to.mutate))), 1)
+    coords[to.mutate, ] - norm.dir.vecs * dists[to.mutate] * pmin(abs(stats::rnorm(length(to.mutate))), 1)
 
   #coords[to.mutate, ] = forceToBounds(mutants)
   coords[to.mutate, ] = mutants
