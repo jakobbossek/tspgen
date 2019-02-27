@@ -2,7 +2,9 @@
 
 export(addMutator)
 export(build)
+export(doAxisProjectionMutation)
 export(doClusterMutation)
+export(doLinearProjectionMutation)
 export(doNormalMutation)
 export(doRotationMutation)
 export(doUniformMutation)

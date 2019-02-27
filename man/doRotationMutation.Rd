@@ -28,7 +28,9 @@ by a randomly sampled angle around its center.
 \seealso{
 \code{\link{build}}
 
-Other mutation operators: \code{\link{doClusterMutation}},
+Other mutation operators: \code{\link{doAxisProjectionMutation}},
+  \code{\link{doClusterMutation}},
+  \code{\link{doLinearProjectionMutation}},
   \code{\link{doNormalMutation}},
   \code{\link{doUniformMutation}}
 }

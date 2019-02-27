@@ -37,7 +37,9 @@ in Artificial Intelligence and Lecture Notes in Bioinformatics), 7219 LNCS, 115-
 \seealso{
 \code{\link{build}}
 
-Other mutation operators: \code{\link{doClusterMutation}},
+Other mutation operators: \code{\link{doAxisProjectionMutation}},
+  \code{\link{doClusterMutation}},
+  \code{\link{doLinearProjectionMutation}},
   \code{\link{doRotationMutation}},
   \code{\link{doUniformMutation}}
 }
