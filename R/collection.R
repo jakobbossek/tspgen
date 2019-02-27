@@ -54,3 +54,40 @@ setProbabilities = function(collection, probs) {
   collection$probs = probs
   return(collection)
 }
+
+#' @export
+print.tspgen_collection = function(x, ...) {
+  n.mutators = length(x$mutators)
+
+  if (n.mutators == 0L) {
+    BBmisc::catf("Empty collection.")
+  } else {
+    probs = if (!is.null(x$probs)) x$probs else rep(1, n.mutators) / n.mutators
+    mutator.names = names(x$mutators)
+    mutator.names = gsub("^do", "", mutator.names)
+    mutator.names = gsub("Mutation$", "", mutator.names)
+
+    BBmisc::catf("Prob.       | Mutator")
+    BBmisc::catf("---------------------")
+    for (i in seq_len(n.mutators)) {
+      BBmisc::catf("P(m) = %.2f | %s %s",
+        probs[i],
+        mutator.names[i],
+        listToString(x$mutators[[i]], wrap = c("(", ")"))
+      )
+    }
+  }
+}
+
+listToString = function(x, wrap = NULL) {
+  if (length(x) == 0)
+    return("")
+  ns = names(x)
+  s = sapply(ns, function(n) {
+    paste0(n, " = ", x[[n]])
+  })
+  s = BBmisc::collapse(s, sep = ", ")
+  if (!is.null(wrap))
+    s = sprintf("%s%s%s", wrap[1L], s, wrap[2L])
+  return(s)
+}
