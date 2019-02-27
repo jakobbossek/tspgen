@@ -30,6 +30,7 @@ by a randomly sampled angle around its center.
 
 Other mutation operators: \code{\link{doAxisProjectionMutation}},
   \code{\link{doClusterMutation}},
+  \code{\link{doGridMutation}},
   \code{\link{doLinearProjectionMutation}},
   \code{\link{doNormalMutation}},
   \code{\link{doUniformMutation}}

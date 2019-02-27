@@ -31,6 +31,7 @@ deviation up to 0.3.
 \code{\link{build}}
 
 Other mutation operators: \code{\link{doAxisProjectionMutation}},
+  \code{\link{doGridMutation}},
   \code{\link{doLinearProjectionMutation}},
   \code{\link{doNormalMutation}},
   \code{\link{doRotationMutation}},
