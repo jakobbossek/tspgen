@@ -7,8 +7,8 @@
 #' that are different from random uniform instances. The implosion mutation is
 #' tailored towards cluster generation. This is achieved by simulating an implosion:
 #' a center of implosion \eqn{c \in R^2} is sampled alongside its implosion
-#' radius \eqn{r \in [min.eps, max.eps]}. Next, all points \eqn{Q \subseteq P} within
-#' the \eqn{r}-ball around the center of implosion are dragged towards the center
+#' radius \eqn{\epsilon \in [min.eps, max.eps]}. Next, all points \eqn{Q \subseteq P} within
+#' the \eqn{\epsilon}-ball around the center of implosion are dragged towards the center
 #' forming small or medium-sized cluster structures (depending on the randomly sampled
 #' implosion radius).
 #'

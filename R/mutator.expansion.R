@@ -1,3 +1,26 @@
+#' @title
+#' Expansion mutation
+#'
+#' @description This is a generalization of the linear projection mutation operator
+#' (see \code{\link{doLinearProjectionMutation}}). The parameters \eqn{a} (intercept)
+#' and \eqn{m} (slope) of a linear function \eqn{a + mx} are sampled (see documentation
+#' of \code{\link{doLinearProjectionMutation}} for details. All points whose orthogonal distance
+#' to the linear function is below the sampled tube with \eqn{\epsilon = U[min.eps, max.eps]}
+#' are subject to mutation. This is achieved by moving the points away from their orthogonal
+#' projections to distance \eqn{\epsilon + Exp(\lambda = 10)}.
+#'
+#' @template arg_coords
+#' @param min.eps [\code{numeric(1)}]\cr
+#'   Minimum value for sampled tube width.
+#'   Default is 0.1
+#' @param max.eps [\code{numeric(1)}]\cr
+#'   Maximum value for the sampled tube with.
+#'   Default is 0.3.
+#' @template arg_dots
+#' @return [\code{matrix}] Mutated coordinates.
+#' @seealso \code{\link{build}}
+#' @family mutation operators
+#' @export
 doExpansionMutation = function(coords, min.eps = 0.1, max.eps = 0.3, ...) {
   doTubeMutation(coords, min.eps, max.eps, type = "Expansion", ...)
 }

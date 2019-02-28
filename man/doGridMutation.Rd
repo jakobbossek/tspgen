@@ -57,6 +57,7 @@ mean \eqn{(0,0)} and standard deviation \code{jitter.sd} in each dimension.
 
 Other mutation operators: \code{\link{doAxisProjectionMutation}},
   \code{\link{doClusterMutation}},
+  \code{\link{doExpansionMutation}},
   \code{\link{doExplosionMutation}},
   \code{\link{doImplosionMutation}},
   \code{\link{doLinearProjectionMutation}},
