@@ -1,3 +1,29 @@
+#' @title
+#' Implosion mutation
+#'
+#' @description Simple mutation operators, e.g., uniform mutation (see \code{\link{doUniformMutation}})
+#' or normal mutation (see \code{\link[doNormalMutation}}) will most likely generate
+#' instances that look uniformly distributed. However, often one is interested structures
+#' that are different from random uniform instances. The implosion mutation is
+#' tailored towards cluster generation. This is achieved by simulating an implosion:
+#' a center of implosion \eqn{c \in R^2} is sampled alongside its implosion
+#' radius \eqn{r \in [min.eps, max.eps]}. Next, all points \eqn{Q \subseteq P} within
+#' the \eqn{r}-ball around the center of implosion are dragged towards the center
+#' forming small or medium-sized cluster structures (depending on the randomly sampled
+#' implosion radius).
+#'
+#' @template arg_coords
+#' @param min.eps [\code{numeric(1)}]\cr
+#'   Minimum value for sampled implosion radius.
+#'   Defaults to 0.1
+#' @param max.eps [\code{numeric(1)}]\cr
+#'   Maximum value for sampled implosion radius.
+#'   Defaults to 0.3.
+#' @template arg_dots
+#' @return [\code{matrix}] Mutated coordinates.
+#' @seealso \code{\link{build}}
+#' @family mutation operators
+#' @export
 doImplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.3, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(min.eps, lower = 0.05, upper = 0.5)

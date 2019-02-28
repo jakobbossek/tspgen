@@ -49,6 +49,7 @@ second coordinate of the projected points.
 Other mutation operators: \code{\link{doAxisProjectionMutation}},
   \code{\link{doClusterMutation}},
   \code{\link{doGridMutation}},
+  \code{\link{doImplosionMutation}},
   \code{\link{doNormalMutation}},
   \code{\link{doRotationMutation}},
   \code{\link{doUniformMutation}}

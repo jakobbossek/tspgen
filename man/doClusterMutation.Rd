@@ -32,6 +32,7 @@ deviation up to 0.3.
 
 Other mutation operators: \code{\link{doAxisProjectionMutation}},
   \code{\link{doGridMutation}},
+  \code{\link{doImplosionMutation}},
   \code{\link{doLinearProjectionMutation}},
   \code{\link{doNormalMutation}},
   \code{\link{doRotationMutation}},
