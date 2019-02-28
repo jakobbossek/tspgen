@@ -1,3 +1,29 @@
+#' @title
+#' Explosion mutation
+#'
+#' @description This operator is closely related to the implosion mutation (see
+#' \code{\link{doImplosionMutation}}). However, instead of dragging points towards
+#' a center those points are instead moved away from it (similar to particles
+#' affected by an explosion). Again, a center of explosion \eqn{c \in R^2} and
+#' an explosion radius \eqn{r = U[min.eps, max.eps]} are sampled at random.
+#' All points within the ball with radius \eqn{r} around \eqn{c} are moved
+#' away from the center following the direction vector between center and
+#' corresponding point. The internals ensure that moved points have distance
+#' at least \eqn{r} to \eqn{c} after mutation plus an additive random number
+#' sampled from an exponential distribution with rate parameter \eqn{\lambda = 10}.
+#'
+#' @template arg_coords
+#' @param min.eps [\code{numeric(1)}]\cr
+#'   Minimum value for sampled explosion radius.
+#'   Default is 0.1.
+#' @param max.eps [\code{numeric(1)}]\cr
+#'   Maximum value for sampled explosion radius.
+#'   Default is 0.3.
+#' @template arg_dots
+#' @return [\code{matrix}] Mutated coordinates.
+#' @seealso \code{\link{build}}
+#' @family mutation operators
+#' @export
 doExplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.4, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(min.eps, lower = 0.05, upper = 0.5)

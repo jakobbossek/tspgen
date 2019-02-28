@@ -32,6 +32,7 @@ Implosion mutation
 
 Other mutation operators: \code{\link{doAxisProjectionMutation}},
   \code{\link{doClusterMutation}},
+  \code{\link{doExplosionMutation}},
   \code{\link{doGridMutation}},
   \code{\link{doLinearProjectionMutation}},
   \code{\link{doNormalMutation}},

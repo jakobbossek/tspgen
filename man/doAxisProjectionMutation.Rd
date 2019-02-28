@@ -44,6 +44,7 @@ coordinate: \eqn{p_a = p_a + N(0, jitter.sd)}.
 \code{\link{build}}
 
 Other mutation operators: \code{\link{doClusterMutation}},
+  \code{\link{doExplosionMutation}},
   \code{\link{doGridMutation}},
   \code{\link{doImplosionMutation}},
   \code{\link{doLinearProjectionMutation}},
