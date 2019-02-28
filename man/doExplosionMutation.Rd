@@ -41,6 +41,7 @@ sampled from an exponential distribution with rate parameter \eqn{\lambda = 10}.
 
 Other mutation operators: \code{\link{doAxisProjectionMutation}},
   \code{\link{doClusterMutation}},
+  \code{\link{doCompressionMutation}},
   \code{\link{doExpansionMutation}},
   \code{\link{doGridMutation}},
   \code{\link{doImplosionMutation}},

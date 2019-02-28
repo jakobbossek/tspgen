@@ -39,6 +39,7 @@ in Artificial Intelligence and Lecture Notes in Bioinformatics), 7219 LNCS, 115-
 
 Other mutation operators: \code{\link{doAxisProjectionMutation}},
   \code{\link{doClusterMutation}},
+  \code{\link{doCompressionMutation}},
   \code{\link{doExpansionMutation}},
   \code{\link{doExplosionMutation}},
   \code{\link{doGridMutation}},
