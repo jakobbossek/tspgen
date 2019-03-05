@@ -65,7 +65,7 @@ doTubeMutation = function(coords, min.eps = 0.1, max.eps = 0.3, type, ...) {
   }))
 
   # at last do the nice mutation
-  mutants = if (type == "expansion")
+  mutants = if (type == "Expansion")
     projs[to.mutate, ] + norm.dir.vecs * (eps + stats::rexp(length(to.mutate), rate = 10))
   else
     coords[to.mutate, ] - norm.dir.vecs * dists[to.mutate] * pmin(abs(stats::rnorm(length(to.mutate))), 1)
