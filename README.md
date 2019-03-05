@@ -20,9 +20,13 @@ One drawback of the afore-mentioned evolutionary instance generation process is 
 This package introduces a set of sophisticated, problem tailored mutation operators which allow for the generation of more diverse sets of instances. The proposed mutation operators have a much higher impact on the points than the ones mentioned before. E.g., *explosion mutation* generates an *explosion* within the points cloud leaving a hole where not points are placed at all. In contrast *cluster mutation* selects a random subset of points and generates a circular cluster somewhere in the plane.
 
 [1] Kerschke, P., Kotthoff, L., Bossek, J., Hoos, H. H., & Trautmann, H. (2017). Leveraging TSP Solver Complementarity through Machine Learning. Evolutionary Computation, 0(0), 1–24. https://doi.org/10.1162/evco_a_00215
+
 [2] Mersmann, O., Bischl, B., Bossek, J., Trautmann, H., Wagner, M., & Neumann, F. (2012). Local search and the traveling salesman problem: A feature-based characterization of problem hardness. Lecture Notes in Computer Science (Including Subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics), 7219 LNCS, 115–129. https://doi.org/10.1007/978-3-642-34413-8_9
+
 [3] Mersmann, O., Bischl, B., Trautmann, H., Wagner, M., Bossek, J., & Neumann, F. (2013). A novel feature-based approach to characterize algorithm performance for the traveling salesperson problem. Annals of Mathematics and Artificial Intelligence, 69(2), 151–182. https://doi.org/10.1007/s10472-013-9341-2
+
 [4] Bossek, J., & Trautmann, H. (2016). Evolving Instances for Maximizing Performance Differences of State-of-the-Art Inexact TSP Solvers. In P. Festa, M. Sellmann, & J. Vanschoren (Eds.), Proceedings of the 10th International Conference on Learning and Intelligent Optimization (LION 2016) (Vol. 10079 LNCS, pp. 48–59). Ischia, Italy: Springer International Publishing. https://doi.org/10.1007/978-3-319-50349-3_4
+
 [5] Bossek, J., & Trautmann, H. (2016). Understanding Characteristics of Evolved Instances for State-of-the-Art Inexact TSP Solvers with Maximum Performance Difference. In G. Adorni, S. Cagnoni, M. Gori, & M. Maratea (Eds.), AI*IA 2016 Advances in Artificial Intelligence (Vol. 10037 LNAI, pp. 3–12). Genova, Italy: Springer International Publishing. https://doi.org/10.1007/978-3-319-49130-1_1
 
 ## Quickstart
