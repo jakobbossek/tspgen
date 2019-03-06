@@ -1,3 +1,11 @@
+mutationAsDataframe = function(coords, to.mutate) {
+  coords = as.data.frame(coords)
+  colnames(coords) = c("x1", "x2")
+  coords$mutated = FALSE
+  coords[to.mutate, "mutated"] = TRUE
+  return(coords)
+}
+
 sampleRows = function(x, p, ...) {
   if (!(checkmate::testMatrix(x) | checkmate::testDataFrame(x)))
     BBmisc::stopf("[sampleRows] You need to pass a matrix or a data frame.")

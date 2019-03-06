@@ -92,6 +92,10 @@ doTubeMutation = function(coords, min.eps = 0.1, max.eps = 0.3, type, ...) {
   # pl = pl + xlim(c(-3, 3)) + ylim(c(-3, 3))
   # print(pl)
   # stop()
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }
 

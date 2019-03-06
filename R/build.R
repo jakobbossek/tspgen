@@ -80,6 +80,7 @@ build = function(n, iters = 10L, collection, return.all = FALSE, upper = 1, boun
     mutator.pars = BBmisc::insert(mutator.pars, list(coords = coords))
     # apply mutation
     coords = do.call(mutator.fun, mutator.pars)
+    attr(coords, "df") = NULL
     # repair points outside the bounding box
     coords = forceToBounds(coords, bound.handling = bound.handling)
     # avoid duplicate nodes

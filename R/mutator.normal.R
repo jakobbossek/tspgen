@@ -18,17 +18,19 @@
 #' @family mutation operators
 #' @seealso \code{\link{build}}
 #' @export
-doNormalMutation = function(coords, pm = 0.1, sigma = 0.0025) {
+doNormalMutation = function(coords, pm = 0.1, sigma = 0.0025, ...) {
   checkmate::assertMatrix(coords, ncols = 2L, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
   checkmate::assertNumber(pm, lower = 0, upper = 1)
   checkmate::assertNumber(sigma, lower = 0.00001, upper = 1)
 
   to.mutate = sampleRows(coords, pm)
-  ## pmin(pmax(...)) used to ensure we stay in bounds:
   if (length(to.mutate) > 0L) {
     delta = matrix(stats::rnorm(2 * length(to.mutate), sd = sigma), ncol = 2L)
     coords[to.mutate,] = coords[to.mutate,] + delta
-    #coords[to.mutate,] = forceToBounds(coords[to.mutate,] + delta)
   }
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }

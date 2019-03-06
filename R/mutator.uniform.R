@@ -22,5 +22,9 @@ doUniformMutation = function(coords, pm = 0.1, ...) {
 
   to.mutate = sampleRows(coords, p = pm)
   coords[to.mutate, ] = getUniformMatrix(length(to.mutate))
-  coords
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
+  return(coords)
 }

@@ -87,5 +87,9 @@ doGridMutation = function(coords, box.min = 0.1, box.max = 0.3, p.rot = 0, p.jit
   }
 
   coords[to.mutate, ] = grid
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }

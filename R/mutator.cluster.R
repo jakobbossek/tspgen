@@ -29,6 +29,10 @@ doClusterMutation = function(coords, pm = 0.1, ...) {
   new.coords = t(t(new.coords) + cl.center)
   new.coords = pmin(pmax(new.coords, 0), 1)
   coords[to.mutate, ] = new.coords
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }
 

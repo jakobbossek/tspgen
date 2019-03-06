@@ -52,6 +52,9 @@ doImplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.3, ...) {
     point + dir.vec * dist * min(abs(stats::rnorm(1L)), eps)#  (stats::runif(1L))
   }))
   coords[to.mutate, ] = mutants
-  # no bounding necessary
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }

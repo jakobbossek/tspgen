@@ -42,5 +42,9 @@ doLinearProjectionMutation = function(coords, pm = 0.1, p.jitter = 0, jitter.sd 
     coords[to.mutate, 2L] = coords[to.mutate, 2L] + stats::rnorm(n.mutants, sd = jitter.sd)
   }
 
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }
+

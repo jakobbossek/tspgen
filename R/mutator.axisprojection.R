@@ -44,5 +44,9 @@ doAxisProjectionMutation = function(coords, pm = 0.1, p.jitter = 0, jitter.sd = 
   }
 
   coords[to.mutate, axis] = line
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }

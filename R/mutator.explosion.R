@@ -73,5 +73,9 @@ doExplosionMutation = function(coords, min.eps = 0.1, max.eps = 0.4, ...) {
   # pl = ggplot(dd, aes(x = x1, y = x2, color = mutated)) + geom_point()
   # print(pl)
   # BBmisc::pause()
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }

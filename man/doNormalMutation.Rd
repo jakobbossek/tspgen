@@ -4,7 +4,7 @@
 \alias{doNormalMutation}
 \title{Normal mutation}
 \usage{
-doNormalMutation(coords, pm = 0.1, sigma = 0.0025)
+doNormalMutation(coords, pm = 0.1, sigma = 0.0025, ...)
 }
 \arguments{
 \item{coords}{[\code{matrix}]\cr

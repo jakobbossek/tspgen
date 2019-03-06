@@ -26,5 +26,9 @@ doRotationMutation = function(coords, pm = 0.1, ...) {
   mutants = t(rot.mat %*% t(coords[to.mutate, ]) + stats::runif(2L))
   #coords[to.mutate, ] = forceToBounds(mutants)
   coords[to.mutate, ] = mutants
+
+  if (!is.null(getOption("tspgen.debug")))
+    attr(coords, "df") = mutationAsDataframe(coords, to.mutate)
+
   return(coords)
 }
