@@ -1,9 +1,58 @@
 #' Initialize a bare mutation operator collection.
 #'
+#' @param preset [\code{character(1)}]\cr
+#'   Shall the collection be initialized with a preset of mutation operators?
+#'   Option \dQuote{simple} adds \link[=doUniformMutation]{uniform} and
+#'   \link[=doNormalMutation]{normal} mutation only.
+#'   Option \dQuote{sophisticated} adds all available operators except the
+#'   simple ones, i.e., uniform and normal.
+#'   Option \dQuote{all} adds all available mutation operators.
+#'   Note that each preset sets the uniform operator selection probability
+#'   distribution, i.e., each operator is equally likely to be selected.
+#'   Default is \code{NULL}, i.e., no preset at all.
 #' @return [\code{tspgen_collection}] Collection of mutation operators.
 #' @export
-init = function() {
-  BBmisc::makeS3Obj("tspgen_collection", mutators = list())
+init = function(preset = NULL) {
+  collection = BBmisc::makeS3Obj("tspgen_collection", mutators = list())
+  if (is.null(preset))
+    return(collection)
+
+  checkmate::assertChoice(preset, choices = c("simple", "sophisticated", "all"), null.ok = FALSE)
+  preset.funs = list(
+    simple = addPresetSimple,
+    sophisticated = addPresetSophisticated,
+    all = addPresetAll)
+
+  do.call(preset.funs[[preset]], list(collection = collection))
+}
+
+addPresetSimple = function(collection) {
+  pm = 0.1
+  collection = addMutator(collection, "doUniformMutation", pm = pm)
+  collection = addMutator(collection, "doNormalMutation", pm = pm)
+  return(collection)
+}
+
+addPresetSophisticated = function(collection) {
+  pm = 0.1
+  p.rot = 0.5
+  jitter.sd = 0.05
+  p.jitter = 0.5
+  collection = addMutator(collection, "doExplosionMutation")
+  collection = addMutator(collection, "doImplosionMutation")
+  collection = addMutator(collection, "doRotationMutation", pm = pm)
+  collection = addMutator(collection, "doClusterMutation", pm = pm)
+  collection = addMutator(collection, "doExpansionMutation")
+  collection = addMutator(collection, "doCompressionMutation")
+  collection = addMutator(collection, "doAxisProjectionMutation", pm = pm, p.jitter = p.jitter, jitter.sd = jitter.sd)
+  collection = addMutator(collection, "doLinearProjectionMutation", pm = pm, p.jitter = p.jitter, jitter.sd = jitter.sd)
+  collection = addMutator(collection, "doGridMutation", pm = pm, p.jitter = p.jitter, jitter.sd = jitter.sd, p.rot = p.rot)
+  return(collection)
+}
+
+addPresetAll = function(collection) {
+  collection = addPresetSophisticated(addPresetSimple(collection))
+  return(collection)
 }
 
 #' Adds a mutation operator to a collection.

@@ -4,7 +4,19 @@
 \alias{init}
 \title{Initialize a bare mutation operator collection.}
 \usage{
-init()
+init(preset = NULL)
+}
+\arguments{
+\item{preset}{[\code{character(1)}]\cr
+Shall the collection be initialized with a preset of mutation operators?
+Option \dQuote{simple} adds \link[=doUniformMutation]{uniform} and
+\link[=doNormalMutation]{normal} mutation only.
+Option \dQuote{sophisticated} adds all available operators except the
+simple ones, i.e., uniform and normal.
+Option \dQuote{all} adds all available mutation operators.
+Note that each preset sets the uniform operator selection probability
+distribution, i.e., each operator is equally likely to be selected.
+Default is \code{NULL}, i.e., no preset at all.}
 }
 \value{
 [\code{tspgen_collection}] Collection of mutation operators.
