@@ -23,3 +23,13 @@ test_that("Mutators produce valid output", {
     expect_true(all(coords >= 0 & coords <= 1))
   }
 })
+
+test_that("Build function", {
+  presets = c("simple", "sophisticated", "all")
+  n.nodes = 50L
+  for (preset in presets) {
+    x = build(n = n.nodes, iters = 25L, collection = init(preset))
+    checkmate::expect_class(x, classes = "Network")
+    checkmate::expect_matrix(x$coordinates, ncols = 2L, nrows = n.nodes, mode = "numeric", any.missing = FALSE, all.missing = FALSE)
+  }
+})
