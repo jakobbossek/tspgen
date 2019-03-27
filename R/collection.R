@@ -140,3 +140,22 @@ listToString = function(x, wrap = NULL) {
     s = sprintf("%s%s%s", wrap[1L], s, wrap[2L])
   return(s)
 }
+
+applyRandomMutation = function(collection, coords) {
+  checkmate::assertClass(collection, "tspgen_collection")
+  checkmate::assertMatrix(coords, mode = "numeric", min.rows = 2L, ncols = 2L, any.missing = FALSE, all.missing = FALSE)
+
+  mutators = collection$mutators
+  n.mutators = length(mutators)
+  mutator.names = names(mutators)
+  probs = if (!is.null(collection$probs)) collection$probs else rep(1, n.mutators) / n.mutators
+
+  idx.mutator = sample(seq_len(n.mutators), size = 1L, prob = probs)
+  mutator.fun  = mutator.names[idx.mutator]
+  mutator.pars = mutators[[mutator.fun]]
+  mutator.pars = BBmisc::insert(mutator.pars, list(coords = coords))
+
+  # apply mutation
+  coords = do.call(mutator.fun, mutator.pars)
+  return(coords)
+}
