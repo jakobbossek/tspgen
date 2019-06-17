@@ -6,7 +6,10 @@
 [![Build Status](https://travis-ci.org/jakobbossek/tspgen.svg?branch=master)](https://travis-ci.org/jakobbossek/tspgen)
 [![Build status](https://ci.appveyor.com/api/projects/status/eu0nns2dsgocwntw/branch/master?svg=true)](https://ci.appveyor.com/project/jakobbossek/tspgen/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/jakobbossek/tspgen/badge.svg?branch=master)](https://coveralls.io/github/jakobbossek/tspgen?branch=master)
-[![Research software impact](http://depsy.org/api/package/cran/tspgen/badge.svg)](http://depsy.org/package/r/tspgen)
+
+This software package accompanies the following publication accepted at the [FOGA2019](https://hpi.de/foga2019/) conference:
+
+Bossek, J., Kerschke, P., Neumann, A., Wagner, M., Neumann, F., & Trautmann, H. (2019). Evolving Diverse TSP Instances by Means of Novel and Creative Mutation Operators. In Proceedings of the 15th ACM/SIGEVO Workshop on Foundations of Genetic Algorithms (FOGA XV), Potsdam, Germany. (**Accepted**)
 
 ## What is this all about?
 
