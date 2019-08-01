@@ -22,7 +22,7 @@ One drawback of the afore-mentioned evolutionary instance generation process is 
 
 This package introduces a set of sophisticated, problem tailored mutation operators which allow for the generation of more diverse sets of instances. The proposed mutation operators have a much higher impact on the points than the ones mentioned before. E.g., *explosion mutation* generates an *explosion* within the points cloud leaving a hole where not points are placed at all. In contrast *cluster mutation* selects a random subset of points and generates a circular cluster somewhere in the plane.
 
-[1] Kerschke, P., Kotthoff, L., Bossek, J., Hoos, H. H., & Trautmann, H. (2017). Leveraging TSP Solver Complementarity through Machine Learning. Evolutionary Computation, 0(0), 1–24. https://doi.org/10.1162/evco_a_00215
+[1] Kerschke, P., Kotthoff, L., Bossek, J., Hoos, H. H., & Trautmann, H. (2018). Leveraging TSP Solver Complementarity through Machine Learning. Evolutionary Computation, 26(4), 597–620. https://doi.org/10.1162/evco_a_00215
 
 [2] Mersmann, O., Bischl, B., Bossek, J., Trautmann, H., Wagner, M., & Neumann, F. (2012). Local search and the traveling salesman problem: A feature-based characterization of problem hardness. Lecture Notes in Computer Science (Including Subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics), 7219 LNCS, 115–129. https://doi.org/10.1007/978-3-642-34413-8_9
 
