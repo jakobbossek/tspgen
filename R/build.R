@@ -28,13 +28,7 @@
 #'   Instance generation takes place in \eqn{[0,1]^2}. Use \code{upper} to
 #'   upscale the boundaries, i.e., place nodes in \eqn{[0, upper]^2}.
 #'   Default is 1.
-#' @param bound.handling [\code{character(1)}]\cr
-#'   Occasionally during instance generation points are moved outside the boundaries
-#'   of the point space. The parameter \code{bound.handling} determines how to deal
-#'   with these points. Option \dQuote{uniform} places outliers uniform at random within
-#'.  the boundaries while option \dQuote{boundary} places them on the corresponding
-#'   violates boundary/boundaries.
-#'   Default is \dQuote{uniform}.
+#' @template arg_bound_handling
 #' @return Either a netgen \code{Network} if \code{return.all = FALSE}, otherwise a
 #' list of netgen networks of length \code{iters + 1}.
 #' @examples

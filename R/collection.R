@@ -141,7 +141,15 @@ listToString = function(x, wrap = NULL) {
   return(s)
 }
 
-applyRandomMutation = function(collection, coords) {
+#' Apply a random mutation from a collection.
+#'
+#' @template arg_collection
+#' @param coords [\code{matrix(n, 2)}]\cr
+#'   Coordinate matrix.
+#' @template arg_bound_handling
+#' @return [\code{matrix(n, 2)}] Mutated coordinate matrix.
+#' @export
+applyRandomMutation = function(collection, coords, bound.handling = "boundary") {
   checkmate::assertClass(collection, "tspgen_collection")
   checkmate::assertMatrix(coords, mode = "numeric", min.rows = 2L, ncols = 2L, any.missing = FALSE, all.missing = FALSE)
 
@@ -157,5 +165,11 @@ applyRandomMutation = function(collection, coords) {
 
   # apply mutation
   coords = do.call(mutator.fun, mutator.pars)
+  attr(coords, "df") = NULL
+
+  # repair points outside the bounding box
+  coords = forceToBounds(coords, bound.handling = bound.handling)
+  # avoid duplicate nodes
+  coords = relocateDuplicates(coords)
   return(coords)
 }

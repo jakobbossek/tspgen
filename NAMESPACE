@@ -2,6 +2,7 @@
 
 S3method(print,tspgen_collection)
 export(addMutator)
+export(applyRandomMutation)
 export(build)
 export(doAxisProjectionMutation)
 export(doClusterMutation)
