@@ -5,6 +5,7 @@ test.R
 .gitignore
 .gitmodules
 README.md
+README.Rmd
 test_all.R
 .travis.yml
 appveyor.yml
@@ -14,3 +15,7 @@ todo
 cran-comments.md
 ^docs$
 data-raw
+^_pkgdown\.yml$
+^pkgdown$
+^\.github$
+^codecov\.yml$

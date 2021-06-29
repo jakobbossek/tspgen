@@ -19,7 +19,8 @@ Imports:
     checkmate (>= 1.1)
 Suggests:
     testthat (>= 0.9.1),
-    rmarkdown
+    rmarkdown,
+    covr
 ByteCompile: yes
 LazyData: yes
 RoxygenNote: 6.1.1
